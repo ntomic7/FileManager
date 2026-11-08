@@ -1,0 +1,3 @@
+Welcome to FileManager! This is your own temporary sandbox. Try uploading,
+ renaming, searching and previewing files. Everything here is deleted
+  automatically after a few hours.

@@ -1,0 +1,407 @@
+:root {
+    --text: #484e9c;
+    --border: #ddd;
+    --surface: #f7f4ed;
+    --row-bg: #e4e5f3;
+    --button-bg: #808bea;
+    --button-text: #e6e8fa;
+    --bttn-hover-bg: #5f6ac9;
+    --bttn-hover-txt: #d5d8eb;
+    --danger: #b42318;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5ead0;
+    color: var(--text);
+    font-family: system-ui, sans-serif;
+}
+h1 {
+    padding-bottom: 10px;
+    border-bottom: 3px solid #838bd5;
+    color: var(--button-bg);
+}
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* ---------- SHARED: text inputs ---------- */
+.new-folder input,
+.search,
+.rename-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+}
+.new-folder input:hover,
+.search:hover {
+    background: var(--row-bg);
+}
+.new-folder input::placeholder,
+.search::placeholder {
+    color: var(--text);
+}
+.new-folder input:focus,
+.search:focus,
+.rename-input:focus {
+    outline: none;
+    border-color: var(--button-bg);
+}
+
+/* ---------- SHARED: primary buttons ---------- */
+.new-folder button, .upload-button, .primary-button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: var(--button-bg);
+    color: var(--button-text);
+    white-space: nowrap;
+    cursor: pointer;
+}
+.new-folder button:hover, .upload-button:hover, .primary-button:hover {
+    background: var(--bttn-hover-bg);
+    color: var(--bttn-hover-txt);
+}
+.new-folder button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ---------- BREADCRUMBS ---------- */
+.breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 24px 0 16px;
+}
+.crumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.breadcrumbs button {
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #e4e1ea;
+    color: #4c529e;
+}
+.breadcrumbs button:hover {
+    background: #d3cfdd;
+}
+
+/* ---------- TOOLBAR, NEW FOLDER, UPLOAD ---------- */
+.toolbar {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.new-folder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.new-folder input {
+    flex: 1;
+    min-width: 0;
+}
+.new-folder .form-error {
+    flex-basis: 100%;
+    margin-left: 0;
+}
+.upload{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* ---------- SEARCH ---------- */
+.search-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.search {
+    flex: 1;
+}
+.search-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.file-row.search-result {
+    width: 100%;
+    padding: 12px 16px;
+    text-align: left;
+}
+.search-result {
+    width: 100%;
+    text-align: left;
+}
+.search-path {
+    flex-shrink: 0;
+    max-width: 35%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* ---------- DROP ZONE ---------- */
+.drop-zone {
+    position: relative;
+    min-height: 160px;
+    border-radius: 12px;
+}
+.drop-zone.dragging {
+    outline: 2px dashed var(--button-bg);
+    outline-offset: 4px;
+}
+.drop-zone.dragging::after {
+    content: "Drop files to upload";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(245, 234, 208, 0.85);
+    font-weight: 600;
+    pointer-events: none;
+}
+
+/* ---------- FILE LIST ---------- */
+.file-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+.file-list li + li {
+    border-top: 1px solid var(--border);
+}
+.file-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px 0 16px;
+}
+.file-row:hover {
+    background: var(--row-bg);
+}
+.file-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    text-align: left;
+}
+a.file-main {
+    color: inherit;
+    text-decoration: none;
+}
+.file-name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.file-size,
+.file-date {
+    flex-shrink: 0;
+    text-align: right;
+    font-size: 14px;
+}
+.file-size {
+    width: 80px;
+}
+.file-date {
+    width: 110px;
+    margin-right: 4px;
+}
+
+/* ---------- RENAME + ICON BUTTONS ---------- */
+.rename-input {
+    flex: 1;
+    min-width: 0;
+    padding: 6px 10px;
+    background: var(--row-bg);
+    border-color: var(--button-bg);
+}
+.rename-input:focus {
+    box-shadow: 0 0 0 1px var(--button-bg);
+}
+.icon-button {
+    padding: 6px 8px;
+    border-radius: 6px;
+    opacity: 0.5;
+    font-size: 20px;
+}
+.icon-button:hover {
+    opacity: 1;
+    background: #f0f1f6;
+}
+.icon-button.danger {
+    padding: 2px 10px;
+    font-size: 25px;
+}
+.icon-button.danger:hover {
+    background: #fee4e2;
+}
+
+/* ---------- LOADING ---------- */
+.loading {
+    opacity: 0;
+    animation: appear 0.2s ease 0.15s forwards;
+}
+.is-loading {
+    pointer-events: none;
+    animation: dim 0.2s ease 0.15s forwards;
+}
+@keyframes appear {
+    to { opacity: 1; }
+}
+@keyframes dim {
+    to { opacity: 0.5; }
+}
+
+/* ---------- ERRORS ---------- */
+.empty,
+.error {
+    padding: 32px;
+    text-align: center;
+    color: var(--danger);
+}
+.form-error {
+    margin-left: 5px;
+    font-size: 14px;
+    color: var(--danger);
+}
+
+/* ---------- DIALOG + NOTICE ---------- */
+.dialog-message {
+    margin: 0 0 16px;
+}
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.secondary-button,
+.danger-button {
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 8px;
+}
+.secondary-button {
+    background: var(--row-bg);
+}
+.secondary-button:hover {
+    background: #d3d6ee;
+}
+.danger-button {
+    background: var(--danger);
+    color: #ffffff;
+}
+.danger-button:hover {
+    background: #8f1c12;
+}
+.notice {
+    margin: 0 0 16px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #fee4e2;
+    color: var(--danger);
+}
+
+/* ----------  MODALS ---------- */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(30, 32, 60, 0.55);
+}
+.modal {
+    display: flex;
+    flex-direction: column;
+    width: min(900px, 100%);
+    max-height: 85vh;
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+}
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+}
+.modal-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+}
+.modal-action {
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: inherit;
+    text-decoration: none;
+}
+.modal-action:hover {
+    background: var(--row-bg);
+}
+.modal.narrow {
+    width: min(420px, 100%);
+}
+.modal-body {
+    padding: 16px;
+    overflow: auto;
+}
+.modal-body img {
+    display: block;
+    max-width: 100%;
+    max-height: 70vh;
+    margin: 0 auto;
+}
+.modal-body pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 14px;
+}
